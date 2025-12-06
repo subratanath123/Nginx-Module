@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: production_nginx
+    
+    ports:
+      - "80:80"
+      - "443:443"
+    
+    restart: always
+    
+    # Mount volumes for persistent configuration and data
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    
+    # Resource limits (Highly recommended for production stability)
+    #deploy:
+    #  resources:
+    #    limits:
+    #      cpus: '0.5'  # Limit to half a CPU core
+    #      memory: 128M # Limit to 128 MB of RAM
+    #    reservations:
+    #      memory: 64M # Reserve at least 64 MB of RAM
+
